@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Форма расчета</h1>
+    <form id="numberForm" method="POST" action="/submit">
+        <label>Текущий процент</label>
+        <input type="number" name="number" min="0" max="100" required>
+        <label>Цена за литр</label>
+        <input type="price" name="price" min="0" max="100" required>
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>
