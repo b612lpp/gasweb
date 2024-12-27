@@ -11,8 +11,6 @@ type webConfig struct {
 	crtPath, keyPath, webPort string
 }
 
-type transferValues struct{ V, P int }
-
 func main() {
 	startWebParam := webConfig{
 		webPort: ":8081"}
@@ -21,6 +19,7 @@ func main() {
 
 	q.HandleFunc("/", handlers.MainPage)
 	q.HandleFunc("/submit", handlers.ValueSubmit)
+	q.HandleFunc("/api/v1/calc", handlers.Handle)
 
 	log.Fatal(http.ListenAndServe(startWebParam.webPort, q))
 
