@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"gasweb/logic"
 	"html/template"
 	"log"
 	"net/http"
@@ -14,22 +15,17 @@ func ValueSubmit(w http.ResponseWriter, r *http.Request) {
 
 	currentValue := parseValues(r.FormValue("number"))
 	currentPrice := parseValues(r.FormValue("price"))
-	toFill := doMath(currentPrice, currentValue)
 
 	t, err := template.ParseFiles("template/calc.html")
 	if err != nil {
 		fmt.Fprintf(w, "page crushed")
 	}
+	toFill, err := logic.DoMath(currentValue, currentPrice)
+	if err != nil {
+		fmt.Fprintf(w, "ошибка обработки данных")
 
+	}
 	t.Execute(w, toFill)
-
-}
-
-func doMath(a, b int) (r resultValues) {
-	toUpperLine := ((85 - a) * 1500) / 100
-	totalCost := toUpperLine * b
-	result := resultValues{V: toUpperLine, P: totalCost}
-	return result
 
 }
 
